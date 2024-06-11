@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -67,7 +33,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
@@ -122,13 +87,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Home</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-básico" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Básico</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-básico">    
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">FIP606 - Análise e visualização de dados em Fitopatologia</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/gadserafini"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/gabrielserafini"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.instagram.com/serafinigabriel/"> <i class="bi bi-instagram" role="img">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -142,40 +127,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#fip606---análise-e-visualização-de-dados-em-fitopatologia" id="toc-fip606---análise-e-visualização-de-dados-em-fitopatologia" class="nav-link active" data-scroll-target="#fip606---análise-e-visualização-de-dados-em-fitopatologia">FIP606 - Análise e visualização de dados em Fitopatologia</a>
+  <ul class="collapse">
+  <li><a href="#sobre-o-autor" id="toc-sobre-o-autor" class="nav-link" data-scroll-target="#sobre-o-autor">Sobre o autor</a></li>
+  <li><a href="#sobre-a-disciplina" id="toc-sobre-a-disciplina" class="nav-link" data-scroll-target="#sobre-a-disciplina">Sobre a disciplina</a></li>
+  <li><a href="#literaturas-de-apoio" id="toc-literaturas-de-apoio" class="nav-link" data-scroll-target="#literaturas-de-apoio">Literaturas de apoio</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">FIP606_2024</h1>
+
+
+
+<section id="fip606---análise-e-visualização-de-dados-em-fitopatologia" class="level1">
+<h1>FIP606 - Análise e visualização de dados em Fitopatologia</h1>
+<p>Esta página foi criada em Quarto Markdown, com o intuito de organiza o material das aulas em tópicos que sejam intuitivos a qualquer pessoa. Convido você a explorar o site e aprender sobre o fascinante mundo da análise de dados.</p>
+<section id="sobre-o-autor" class="level2">
+<h2 data-anchor-id="sobre-o-autor">Sobre o autor</h2>
+<p>Gabriel A. D. Serafini é graduado em Agronomia pelo <a href="https://santateresa.ifes.edu.br/">Instituto Federal de Educação, Ciência e Tecnologia do Espírito Santo - Campus Santa Teresa</a> (2017). Atualmente doutorando em Fitotecnia (2023), com ênfase em Agricultura Digital pelo <a href="https://posfitotecnia.ufv.br/">Departamento de Fitotecnia da Universidade Federal de Viçosa</a> - UFV, onde também obteve o título de Mestre em Fitotecnia (2020), tendo como foco de seus estudos o Melhoramento de Plantas. Além disso, realizou especialização em Inteligência Artificial e Computacional (2022) pelo Departamento de Engenharia Elétrica da mesma instituição.</p>
+<div class="quarto-about-jolla content">
+  <img src="img/pitch_apres.jpg" class="about-image
+  round " style="height: 15em; width: 15em;">
+ <div id="about-block">
+</div> 
+  <hr class="about-sep">
+   <div class="about-links">
+  <a href="http://lattes.cnpq.br/6340181026697416" class="about-link" rel="" target="">
+    <i class="bi bi-globe"></i>
+     <span class="about-link-text">Lattes</span>
+  </a>
+  <a href="https://orcid.org/0000-0002-5254-3264" class="about-link" rel="" target="">
+    <i class="bi bi-id-card"></i>
+     <span class="about-link-text">ORCID</span>
+  </a>
+  <a href="mailto:gabriel.serafini@ufv.br" class="about-link" rel="" target="">
+    <i class="bi bi-envelope"></i>
+     <span class="about-link-text">Email</span>
+  </a>
+</div>
 </div>
 
+</section>
+<section id="sobre-a-disciplina" class="level2">
+<h2 data-anchor-id="sobre-a-disciplina">Sobre a disciplina</h2>
+<p>A disciplina de <strong>FIP606 -</strong>&nbsp;<strong>Análise e visualização de dados em Fitopatologia</strong> do Programa de Pós-graduação em Fitopatologia da UFV, foi ministrada pelo Professor&nbsp;<a href="https://emersondelponte.netlify.app/">Emerson Del Ponte</a> no primeiro semestre letivo do ano de 2024.</p>
+<p>Embora direcionada a pós-graduandos em Fitopatologia, os princípios e métodos abordados são aplicáveis a outras áreas do conhecimento que lidam com dados e problemas similares. A disciplina capacita os estudantes a conduzir todas as etapas da pesquisa científica, desde o planejamento e coleta de dados até a análise e comunicação dos resultados, utilizando o ambiente computacional.</p>
+<p>A disciplina é ensinada na linguagem de programação atualmente mais utilizada pela comunidade científica, a linguagem <a href="https://cran.rstudio.com/index.html">R</a> . Para isso, utiliza do ambiente de desenvolvimento integrado (IDE) <a href="https://posit.co/products/open-source/rstudio/">RStudio</a>, seguindo a filosofia do tidyverse e gerando propts reproduzíveis em Quarto Markdown.</p>
+</section>
+<section id="literaturas-de-apoio" class="level2">
+<h2 data-anchor-id="literaturas-de-apoio">Literaturas de apoio</h2>
+<p>Nesta disciplina foi utilizada a <a href="https://emdelponte.github.io/FIP606-apostila/">apostila da disciplina</a>, disponibilizada pelo Porf. Emerson Del Ponte como literatura principal. Esta apostila, foi produzida em R Markdown e utilizando o pacote bookdown para geração no formato gitbook, é uma ferramenta completa, intuitiva e de fácil compreensão, combinando textos e códigos em R, com a programação ensinada no IDE RStudio seguindo a filosofia do tidyverse. Esta apostila é ideal para iniciantes, oferecendo uma abordagem clara e acessível para quem deseja aprender análise de dados usando R.</p>
+<p>Recomendo também o livro <a href="https://r4ds.hadley.nz/">“R para Data Science”</a> de Hadley Wickham e Garrett Grolemund, caso deseje aprofundar os conhecimentos em ciência de dados com R. Este livro é robusto e detalhado, abrangendo desde a importação e limpeza de dados até a visualização e modelagem, utilizando também os pacotes do tidyverse. Com uma abordagem prática e acessível, ele é ideal tanto para iniciantes quanto para aqueles com alguma experiência.</p>
+<p>Outra recomendação é o livro <a href="https://www.oreilly.com/library/view/estatistica-pratica-para/9788550806037/">“Estatística Prática para Cientistas de Dados”</a> de Peter Bruce e Andrew Bruce, um livro consiso mas de leitura essencial para quem busca compreender e aplicar conceitos estatísticos no campo da ciência de dados. Este livro oferece uma abordagem prática e acessível utilizando o R como forma de ensino, tornando a estatística intuitiva e fácil de entender para profissionais de todas as áreas. Ele cobre tópicos fundamentais como distribuição de dados, inferência estatística, testes de hipóteses, regressão e análise de variância, com exemplos claros e exercícios práticos no R.</p>
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>This is a Quarto website.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -198,13 +213,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

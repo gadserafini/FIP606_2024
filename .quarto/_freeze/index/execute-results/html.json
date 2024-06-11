@@ -1,8 +1,8 @@
 {
-  "hash": "229e155a1a16a0342fb1a3e895adfb65",
+  "hash": "5fe825ea38cccf7b2b405ba82c4ebd11",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"FIP606_2024\"\n---\n\n\nThis is a Quarto website.\n\nTo learn more about Quarto websites visit <https://quarto.org/docs/websites>.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2\n```\n\n\n:::\n:::\n",
+    "markdown": "---\nabout: \n  template: jolla\n  id: about-block\n  image: \"img/pitch_apres.jpg\"\n  image-shape: round\n  links:\n    - icon: instagram\n      text: Instagram\n      href: https://github.com/gadserafini\n    - icon: linkedin\n      text: LinkedIn\n      href: https://www.linkedin.com/in/gabrielserafini\n    - icon: github\n      text: Githube\n      href: https://github.com/gadserafini\n    - icon: envelope\n      text: Email\n      href: \"mailto:gabriel.serafini@ufv.br\"\n---\n\n\n# Disciplina de FIP606 - Análise e visualização de dados\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2\n```\n\n\n:::\n:::\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
