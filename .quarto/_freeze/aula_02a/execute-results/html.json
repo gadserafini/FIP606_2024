@@ -1,0 +1,15 @@
+{
+  "hash": "e9b37ad121151e1d106ff0a62ab0fd5c",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Pacotes no R\"\nauthor: \"Gabriel A. D. Serafini\"\nformat: html\neditor: visual\n---\n\n\n# Pacotes\n\n**Pacotes** são coleções de funções, dados e documentação que expandem as capacidades básicas do R. O `tidyverse`, que usaremos como exemplo, é um conjunto de pacotes R projetados para a ciência de dados, incluindo `ggplot2`, `dplyr`, `tidyr`, `readr`, `purrr`, `tibble`, `stringr` e `forcats`.\n\n## Como Instalar\n\nPara instalar pacotes como `tidyverse`, você pode usar a função `install.packages()`:\n\n`install.packages(\"tidyverse\")`\n\nCaso esteje utilizando o RStudio, pode acessar o menu de instalação de pacotes e instalar seguindo os seguintes passos:\n\n-   No menu superior do RStudio, clique em `Tools`.\n\n-   Selecione `Install Packages...` no menu suspenso.\n\n-   Na janela que se abre, digite o nome do pacote, no nosso caso o `tidyverse`, no campo de texto.\n\n-   Certifique-se de que a opção \"Install dependencies\" está marcada, para que todas as dependências sejam instaladas também.\n\n-   Clique no botão `Install`.\n\n## Como Carregar os Pacotes\n\nO carregamento de **pacotes** pode ser feito pelo menu ou então com um comando no *console*. Após a instalação, você precisa carregar o pacote para utilizá-lo em sua sessão de R. Isso é feito com a função `library()`:\n\n`library(tidyverse)`\n\nUma vez carregado, você pode utilizar as funções e dados disponíveis no pacote carregado.\n\n## Como Pedir ou Ver Ajuda Sobre o Pacote\n\nPara obter ajuda sobre o pacote `tidyverse` ou uma função específica, você pode usar a função `help()` ou `?`. Por exemplo, para obter ajuda sobre o pacote `tidyverse`:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nhelp(package = \"tidyverse\") \n```\n:::\n\n\nOu para obter ajuda sobre uma função específica dentro do `dplyr`, como `mutate`:\n\n\n::: {.cell}\n\n```{.r .cell-code}\n?mutate \n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\nNenhuma documentação para 'mutate' nos pacotes e bibliotecas especificados:\nvocê poderia tentar '??mutate'\n```\n\n\n:::\n:::\n\n\nVocê também pode usar a função `help.search()` para buscar tópicos de ajuda relacionados a um termo específico:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nhelp.search(\"mutate\") \n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\ninicializando servidor httpd de ajuda ... concluído\n```\n\n\n:::\n:::\n\n\nAlém disso, a função `vignette()` pode ser usada para acessar tutoriais e exemplos incluídos no pacote `tidyverse`. Para listar todas as vinhetas disponíveis:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nvignette(package = \"tidyverse\") \n```\n:::\n\n\nE para abrir uma vinheta específica:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nvignette(\"tidy-data\") \n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

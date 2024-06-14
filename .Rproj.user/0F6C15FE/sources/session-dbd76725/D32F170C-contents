@@ -1,0 +1,68 @@
+---
+title: "Instalação"
+author: "Gabriel A. D. Serafini"
+format: html
+editor: visual
+---
+
+# O Software R e a IDE RStudio
+
+A linguagem de programação R é um ambiente de software livre voltado para computação estatística e gráficos, amplamente utilizada por estatísticos, cientistas de dados e analistas. Desenvolvida inicialmente na Universidade de Auckland, R é conhecida por suas capacidades avançadas de análise de dados, visualização gráfica e extensa biblioteca de pacotes disponíveis no CRAN. Sua flexibilidade permite a realização de tarefas que vão desde a manipulação de dados simples até modelagem estatística complexa. Gratuito e de código aberto, R conta com uma comunidade ativa que contribui para seu contínuo desenvolvimento e aplicação em diversas áreas, incluindo pesquisa acadêmica, finanças e bioinformática.
+
+O RStudio é um ambiente de desenvolvimento integrado (IDE) para a linguagem R, projetado para facilitar a análise de dados e o desenvolvimento de código, apesar de não ser obrigatório para o funcionamento do software R sua instalação e utilização é amplamente recomendada. Ele oferece um editor de código avançado, um console interativo, ferramentas de visualização de dados, gerenciamento de pacotes e suporte a RMarkdown, além de integração com sistemas de controle de versão como Git e SVN. Com uma interface intuitiva e recursos que aumentam a produtividade, RStudio é amplamente utilizado tanto por iniciantes quanto por especialistas em ciência de dados.
+
+## Instalando o R : Guia Rápido
+
+Instalar o R é um processo simples e direto. Siga os passos abaixo para instalar o R no seu sistema:
+
+### Baixando o R
+
+1.  **Acesse o site oficial do R**:
+
+    -   Abra seu navegador e vá para [CRAN (The Comprehensive R Archive Network)](https://cran.r-project.org/).
+
+2.  **Escolha seu sistema operacional**:
+
+    -   **Windows**: Clique em "Download R for Windows".
+
+    -   **macOS**: Clique em "Download R for (Mac) OS X".
+
+    -   **Linux**: Clique em "Download R for Linux".
+
+3.  **Baixe o instalador**:
+
+4.  **Execute o instalador**:
+
+5.  **Siga as instruções do instalador**:
+
+**OBS.:** A instalação varia de acordo com o sistema operacional do seu computador, um passo a passo mais detalhado pode ser fácilmente encontrado no site do R-Project, onde realizou o download do software.
+
+### Verificar a Instalação do R
+
+1.  **Abrir o R**:
+
+    -   No Windows e macOS, procure o ícone do R no menu Iniciar ou no Launchpad, respectivamente, e clique para abrir.
+
+    -   No Linux, abra um terminal e digite `R` para iniciar o console do R.
+
+2.  **Verificar a versão do R**:
+
+    -   No console do R, digite o comando `version` e pressione Enter. Isso exibirá informações sobre a versão do R instalada.
+
+## Instalando o RStudio
+
+1.  **Baixar o RStudio**:
+
+    -   Acesse o site do[RStudio](https://posit.co/download/rstudio-desktop/) e baixe a versão apropriada para seu sistema operacional.
+
+2.  **Instalar o RStudio**:
+
+    -   No Windows, execute o instalador baixado e siga as instruções.
+
+    -   No macOS, abra o pacote `.dmg` baixado e arraste o ícone do RStudio para a pasta Aplicativos.
+
+    -   No Linux, siga as instruções específicas para a sua distribuição no site do RStudio.
+
+3.  **Abrir o RStudio**:
+
+    -   Após a instalação, abra o RStudio a partir do menu Iniciar, Launchpad ou terminal.

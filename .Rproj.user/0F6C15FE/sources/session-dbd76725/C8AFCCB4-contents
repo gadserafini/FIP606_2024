@@ -1,0 +1,49 @@
+---
+title: "Aula 3"
+format: html
+editor_options: 
+  chunk_output_type: inline
+---
+
+# Import data
+
+## From packages
+
+```{r}
+cars2 <- cars
+speed <- cars2$speed
+speed
+```
+
+```{r}
+library(r4pde)
+df <- RustSoybean
+```
+## From Excel
+
+```{r}
+library(readxl)
+magnesio <- read_excel("dados/dados-diversos.xlsx")
+escala1 <- read_excel("dados/dados-diversos.xlsx", "escala")
+escala2 <- read_excel("dados/dados-diversos.xlsx", 2)
+```
+
+## From csv
+
+```{r}
+library(tidyverse)
+magnesio2 <- read.csv("dados/dados-diversos.csv")
+magnesio3 <- read_csv("dados/dados-diversos.csv")
+magnesio3
+
+magnesio4 <- read.table("dados/dados-diversos.txt", header = TRUE)
+
+```
+
+
+
+
+
+
+
+
