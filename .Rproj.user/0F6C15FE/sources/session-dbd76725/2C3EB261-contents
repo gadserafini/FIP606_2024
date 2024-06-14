@@ -6,12 +6,12 @@ website:
   title: "FIP606_2024"
   navbar:
     left:
-      - text: Básico
+      - text: R Básico
         menu: 
           - href: aula_01a.qmd
             text: Instalação
           - href: aula_01b.qmd
-            text: Ferramentas de autoria
+            text: Ferramentas de Autoria
           - href: aula_02a.qmd
             text: Pacotes
           - href: aula_02b.qmd

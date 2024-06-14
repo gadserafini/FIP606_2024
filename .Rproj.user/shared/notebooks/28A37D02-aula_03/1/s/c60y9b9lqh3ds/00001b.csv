@@ -1,0 +1,50 @@
+"0","p1 <- cr_oromia |>"
+"0","  ggplot(aes(x = cultivar,"
+"0","             y = sev2,"
+"0","             fill = cultivar))+"
+"0","  geom_boxplot()+"
+"0","  labs(x = ""Cultivar"","
+"0","       y = ""Severity (%)"")#+ #lembrar de tirar o comentário do +"
+"0","  #coord_flip() #rotaciona as coordenadas"
+"0",""
+"0","p2 <- cr_pr |>"
+"0","  ggplot(aes(x = cultivar,"
+"0","             y = sev2,"
+"0","             fill = cultivar))+"
+"0","  geom_boxplot()+"
+"0","  labs(x = ""Cultivar"","
+"0","       y = ""Severity (%)"")#+ #lembrar de tirar o comentário do +"
+"0","  coord_flip() #rotaciona as coordenadas"
+"1","<ggproto object: Class CoordFlip, CoordCartesian, Coord, gg>
+    aspect: function
+    backtransform_range: function
+    clip: on
+    default: FALSE
+    distance: function
+    expand: TRUE
+    is_free: function
+    is_linear: function
+    labels: function
+    limits: list
+    modify_scales: function
+    range: function
+    render_axis_h: function
+    render_axis_v: function
+    render_bg: function
+    render_fg: function
+    setup_data: function
+    setup_layout: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    setup_params: function
+    train_panel_guides: function
+    transform: function
+    super:  <ggproto object: Class CoordFlip, CoordCartesian, Coord, gg>"
+"1",""
+"1","
+"
+"0","library(patchwork)"
+"0",""
+"0","(p1 + p2) + #Pode ser + ou |, se colocar / coloca um sobre o outro. Ele funciona como equação, pode ser feito combinação dos gráficos como p1/(p2+p1)"
+"0","plot_layout(guides = ""collect"") + #Deixa somente uma legenda"
+"0","plot_annotation(tag_levels = ""A"") #Diferencia maiúsculas e minúsculas"

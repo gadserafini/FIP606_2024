@@ -1,0 +1,60 @@
+---
+title: "aula 4"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+# Gráficos em ggplot
+
+## Importa dados
+
+```{r}
+library(tidyverse)
+mg <- read_csv("dados/dados-diversos.csv")
+```
+
+## Gráficos
+
+```{r}
+mg |> 
+  ggplot(aes(Irrigation, severity,
+             shape = Irrigation))+
+  geom_point(alpha = 0.5)
+
+```
+
+```{r}
+mg2 <- mg |> 
+  select(day, rep, severity) |> 
+  group_by(day) |> 
+  summarize(sev = mean(severity))
+```
+
+
+```{r}
+mg2 |> 
+  ggplot(aes(day, sev*100))+
+  geom_line(color = "darkorange")+
+  geom_point(size = 3,
+             color = "darkorange")+
+   scale_x_continuous(breaks = c(0,7, 14, 21, 28, 35, 42, 49, 56, 63))+
+  scale_y_continuous(n.breaks = 5,
+                     limits = c(0,100))+
+    labs(x = "Time (days)",
+         y = "Severity (%)",
+         title = "My first disease progress curve",
+         subtitle = "Using ggplot",
+         caption = "Source: FIP 606")+
+  theme_light()
+ggsave("figures/myfirstggplot.png", 
+       bg = "white",
+       width = 4,
+       height = 3)
+
+```
+
+
+
+
+

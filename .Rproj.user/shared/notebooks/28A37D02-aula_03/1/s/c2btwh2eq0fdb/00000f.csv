@@ -1,8 +1,8 @@
-"0","#| warming: false"
-"0","#| menssage: false"
-"0",""
+"0","#| warning: false"
+"0","#| message: false"
+"0","#Carregando pacote"
 "0","library(tidyverse)"
-"0",""
+"0","#Importando arquivo CSV do Git Hub"
 "0","cr <- read_csv(""https://raw.githubusercontent.com/emdelponte/paper-coffee-rust-Ethiopia/master/data/survey_clean.csv"")"
 "1","[1mRows: [22m[34m405[39m [1mColumns: [22m[34m13[39m
 "
