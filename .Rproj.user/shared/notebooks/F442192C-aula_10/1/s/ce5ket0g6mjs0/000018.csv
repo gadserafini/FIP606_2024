@@ -1,0 +1,4 @@
+"0","imgs2 <- imgs[, c(""Assess"", ""LeafDoctor"", ""ImageJ"")]"
+"0",""
+"0","library(AgroR)"
+"0","corgraph(imgs2) "

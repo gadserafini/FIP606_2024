@@ -1,0 +1,8 @@
+"0","library(corrplot)"
+"2","Aviso:"
+"2"," pacote ‘corrplot’ foi compilado no R versão 4.4.1
+"
+"2","corrplot 0.92 loaded
+"
+"0","cor_imgs2 <- cor(imgs2)"
+"0","corrplot(cor_imgs2, method = ""number"", type = ""lower"")"

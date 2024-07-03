@@ -1,0 +1,3 @@
+"0","library(corrplot)"
+"0","cor_imgs2 <- cor(imgs2)"
+"0","corrplot(cor_imgs2, method = ""circle"", type = ""lower"") #Pode ser square tabém, e escolher o type, esse pacote é muito mais customizável. diag False tira a diagonal"

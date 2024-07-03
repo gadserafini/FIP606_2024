@@ -1,0 +1,7 @@
+"0","lambda <- b$x[which.max(b$y)]"
+"0","lambda"
+"1","[1]"
+"1"," -1.555556"
+"1","
+"
+"0","soja$FER2 <-(soja$FER ^lambda -1)/lambda"

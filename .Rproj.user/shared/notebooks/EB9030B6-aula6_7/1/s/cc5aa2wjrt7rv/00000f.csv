@@ -1,0 +1,4 @@
+"0","m2 <- lm(count3 ~ spray,"
+"0","         data = inseticida)"
+"2","Error in eval(predvars, data, env) : objeto 'count3' não encontrado
+"

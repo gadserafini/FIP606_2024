@@ -1,0 +1,7 @@
+"0","library(leaflet)"
+"2","Aviso:"
+"2"," pacote ‘leaflet’ foi compilado no R versão 4.4.1
+"
+"0","leaflet() |> "
+"0","  addTiles() |> "
+"0","  setView(lng = -42.8825, lat = -20.7546, zoom = 15)"

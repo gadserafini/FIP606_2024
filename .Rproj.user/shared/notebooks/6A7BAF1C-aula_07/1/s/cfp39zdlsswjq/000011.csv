@@ -1,0 +1,4 @@
+"0","m5 <- lm(count3 ~ spray,"
+"0","         data = inseticida)"
+"0","library(DHARMa)"
+"0","plot(simulateResiduals(m5))"

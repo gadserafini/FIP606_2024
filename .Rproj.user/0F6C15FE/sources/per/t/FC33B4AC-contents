@@ -1,0 +1,287 @@
+---
+title: "aula9"
+format: html
+---
+
+## Parcela subdividida
+
+```{r}
+library(tidyverse)
+library(gsheet)
+milho <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=1345524759")
+
+
+```
+
+## Index
+
+```{r}
+milho |> 
+  ggplot(aes(method, index))+
+  geom_jitter(width = 0.1, alpha = 0.2)+
+  facet_wrap(~ hybrid)+
+ stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "blue")
+```
+## Modelo para subdividida
+
+```{r}
+library(lme4)
+
+milho <- milho |> 
+  mutate(block = as.factor(block))
+
+mix2 <- lmer(sqrt(index) ~ hybrid*method + block + (1|block/hybrid), data =  milho)
+library(car)
+Anova(mix2)
+
+mix2
+library(performance)
+check_normality(mix2)
+check_heteroscedasticity(mix2)
+
+library(DHARMa)
+plot(simulateResiduals(mix2))
+qqnorm(residuals(mix2))
+qqline(residuals(mix2))
+hist(residuals(mix2))
+
+library(emmeans)
+
+medias_milho <- emmeans(mix2,
+                        ~ hybrid | method,
+                        type = "response")
+medias_milho2 <- emmeans(mix2,
+                        ~ method | hybrid, 
+                        type = "response")
+library(multcomp)
+cld(medias_milho2, Letters = LETTERS)
+```
+
+```{r}
+
+
+mix3 <- lmer(sqrt(yield) ~ hybrid*method + block + (1|block/hybrid), data =  milho)
+
+Anova(mix3)
+check_heteroscedasticity(mix3)
+check_normality(mix3)
+
+
+
+
+```
+# Regressão linear
+
+```{r}
+estande <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=401662555")
+
+estande |> 
+  ggplot(aes(trat, nplants))+
+  geom_jitter(width = 0.1, alpha = 0.5)+
+  facet_wrap(~ exp)+
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "blue")+
+ geom_smooth(method = "lm", se = F)
+
+exp2 <- estande |> 
+  filter(exp == 2)
+
+exp2 |> 
+  ggplot(aes(trat, nplants))+
+  geom_point()+
+  ylim(0,100)+
+  geom_smooth(method= "lm", 
+              se=FALSE, 
+              formula = y ~poly(x,2), color="black")+
+  geom_smooth(method = "lm",
+              se = FALSE)
+
+# modelo linear
+
+exp2$trat2 <- exp2$trat^2 
+  
+# primeira ordem
+lm2 <- lm(nplants ~ trat, 
+          data = exp2)
+# segunda ordem ou quadrático
+lm3 <- lm(nplants ~ trat + trat2 , 
+          data = exp2)
+
+summary(lm2)
+summary(lm3)
+AIC(lm2)
+AIC(lm3)
+library(agro3)
+with(exp2, polynomial(trat,nplants, grau = 2))
+data("phao")
+with(phao, polynomial(dose,comp, grau = 2))
+
+```
+```{r}
+library(lme4)
+glm3 <- glmer(nplants ~ trat + (trat | exp), family = "gaussian",
+            data = estande)
+summary(glm3)
+AIC(glm3)
+
+glmb3 <- glmer(nplants ~ trat + (trat | exp), family = poisson(link = "log"), 
+             data = estande)
+summary(glmb3)
+AIC(glmb3)
+
+remotes::install_github("emdelponte/r4pde")
+
+library(r4pde)
+wm <- WhiteMoldSoybean
+
+wm |> 
+  ggplot(aes(inc, yld, group = factor(study)))+
+  geom_point()+
+  #facet_wrap(~study)+
+  theme_minimal()+
+  geom_smooth(method = "lm", se = F)
+
+mofo1 <- lm(yld ~ inc, data = wm)
+summary(mofo1)
+```
+
+```{r}
+library(broom)
+
+mofo2 <- wm |> 
+  group_by(study) |> 
+  do(tidy(lm(.$yld ~ .$inc), conf.int = TRUE))
+mofo2
+
+
+
+
+
+
+
+fit_all |> 
+  filter(term == ".$inc") |> 
+  ggplot(aes(x = estimate))+
+  geom_histogram(bins = 8, color = "white", fill = "gray50")+
+  theme_r4pde()+
+  labs(x = "slopes", y = "Frequency")
+
+p3 <- fit_all |> 
+  filter(term == "(Intercept)") |> 
+  ggplot(aes(x = estimate))+
+  geom_histogram(bins = 8, color = "white", fill = "gray50")+
+  theme_r4pde()+
+  labs(x = "Intercept", y = "Frequency")
+
+
+df <- mofo2 |> filter(term == ".$inc")
+mean(df$estimate)
+
+
+p4 <- fit_all |> 
+  filter(term == ".$inc") |> 
+  ggplot(aes(x = estimate))+
+  geom_histogram(bins = 8, color = "white", fill = "gray50")+
+  theme_r4pde()+
+  labs(x = "Slope", y = "Frequency")
+
+
+library(patchwork)
+p3 | p4
+```
+
+```{r}
+
+library(lme4)
+mofo3 <- lmer(yld ~ inc + (inc |study), data = wm, 
+            REML = F)
+summary(mofo3)
+Anova(mofo3)
+confint(mofo3, method = "Wald")
+
+```
+
+
+
+```{r}
+library(tidyverse)
+library(gsheet)
+imgs <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=373270992")
+
+imgs |> 
+  pivot_longer(3:5, names_to = "method", 
+               values_to = "value") |> 
+  ggplot(aes(method, value))+
+  geom_boxplot()
+
+imgs |> 
+  ggplot(aes(Assess, ImageJ))+
+  geom_point()+
+  geom_smooth(method = "lm")
+
+imgs2 <- imgs |> 
+  select(3:5)
+
+library(AgroR)
+corgraph(imgs2)
+
+cor.test(imgs$Assess, imgs$LeafDoctor)
+cor(imgs$Assess, imgs$LeafDoctor)
+
+library(corrplot)
+cor_imgs2 <- cor(imgs2)
+corrplot(cor_imgs2, method = 'number', type = "upper", diag = FALSE)
+
+campo <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=866852711")
+
+campo2 <- campo |> 
+  select(DFC, FER, PROD)
+corgraph(campo2)
+
+
+campo |> 
+  ggplot(aes(DFC, PROD))+
+  geom_point()
+
+```
+
+
+
+```{r}
+pyra <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=465348652")
+
+pyra2 <- pyra |> 
+  group_by(code, state, dose) |> 
+  summarise(mean_germination = mean(germination)) 
+
+pyra2|> 
+  ggplot(aes(dose, mean_germination))+
+  geom_point()+
+  facet_wrap(~code)
+
+library(drc)
+
+isolado165 <- pyra2 |> 
+  filter(code == "186")
+
+drc1 <- drm(mean_germination ~ dose, data = isolado165,
+            fct = W1.3())
+AIC(drc1)
+plot(drc1)
+ED(drc1, 50, interval = "delta")
+summary(drc1)
+
+library(ec50estimator)
+df_ec50 <- estimate_EC50(mean_germination ~ dose,
+                         data = pyra2,
+                         isolate_col = "code",
+                         interval = "delta",
+                         fct = drc::LL.3())
+
+df_ec50 |> 
+  ggplot(aes(reorder(ID, Estimate), Estimate))+
+  geom_point()+
+  geom_errorbar(aes(ymin = Lower, ymax = Upper), width = 0.1)+
+  coord_flip()
+```
+
+

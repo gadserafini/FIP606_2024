@@ -1,0 +1,3 @@
+"0","li |>"
+"0","  ggplot(aes(treat ,severity, color = factor(dose)))+"
+"0","  geom_jitter(width = 0.1)"

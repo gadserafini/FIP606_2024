@@ -1,0 +1,7 @@
+"0","theme_set(theme_bw())"
+"0",""
+"0",""
+"0",""
+"0","inseticida |> "
+"0","  ggplot(aes(spray, count))+"
+"0","  geom_boxplot()"

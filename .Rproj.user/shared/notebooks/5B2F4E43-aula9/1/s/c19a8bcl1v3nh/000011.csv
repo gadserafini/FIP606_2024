@@ -1,0 +1,13 @@
+"0","exp2 <- estande |> "
+"0","  filter(exp == 2)"
+"0",""
+"0","exp2 |> "
+"0","  ggplot(aes(log(trat), nplants))+"
+"0","  geom_point()+"
+"0","  ylim(0,100)+"
+"0","  geom_smooth(se = F)"
+"1","[38;5;250m`geom_smooth()` using method = 'loess' and formula = 'y ~ x'[39m
+"
+"2","Aviso:"
+"2"," [38;5;250mRemoved 4 rows containing non-finite outside the scale range (`stat_smooth()`).[39m
+"

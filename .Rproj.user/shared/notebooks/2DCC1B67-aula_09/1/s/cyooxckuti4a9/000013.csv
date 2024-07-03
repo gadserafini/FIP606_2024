@@ -1,0 +1,9 @@
+"0","exp3 <- estande |> "
+"0","  filter(exp ==3)"
+"0",""
+"0","exp3 |> "
+"0","  ggplot(aes(trat, nplants))+"
+"0","  geom_point()+"
+"0","  geom_smooth(se = F, method = ""lm"")"
+"1","[38;5;250m`geom_smooth()` using formula = 'y ~ x'[39m
+"

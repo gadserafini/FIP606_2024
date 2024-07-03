@@ -1,0 +1,7 @@
+"0","library(lme4)"
+"0","mofo3 <- lmer(yld ~inc +(inc|study), data = wm)"
+"2","Aviso em checkConv(attr(opt, ""derivs""), opt$par, ctrl = control$checkConv,  :"
+"2","
+ "
+"2"," Model failed to converge with max|grad| = 0.00587194 (tol = 0.002, component 1)
+"

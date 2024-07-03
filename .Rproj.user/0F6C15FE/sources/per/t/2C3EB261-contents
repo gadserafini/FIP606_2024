@@ -27,10 +27,20 @@ website:
       - text: Análise estatística
         menu:
           - href: aula_06.qmd
-            text: Teste de média
-          - href: aula_04.qmd
-            text: Outras abordagens   
-            
+            text: Inferencial
+          - href: aula_07.qmd
+            text: ANOVA
+          - href: aula_08.qmd
+            text: ANOVA DBC
+          - href: aula_09.qmd
+            text: Regressão
+          - href: aula_10.qmd
+            text: Correlação   
+
+      - text: Crição de mapas
+        menu:
+          - href: aula_12.qmd
+            text: Mapas interativos            
     right: 
       - icon: github
         href: https://github.com/gadserafini

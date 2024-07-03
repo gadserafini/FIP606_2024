@@ -1,0 +1,5 @@
+"0","library(ec50estimator)"
+"0",""
+"0","df_ec50 <- estimate_EC50(mean_germination ~ dose, data = pyra2, isolate_col = ""code"", interval = ""delta"", fct = drc::LL.3())"
+"0",""
+"0","df_ec50"

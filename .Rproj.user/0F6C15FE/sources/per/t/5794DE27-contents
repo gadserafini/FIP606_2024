@@ -1,0 +1,211 @@
+---
+title: "Análise Estatística: Estatística inferencial - Parte 3"
+author: "Gabriel A D Serafini"
+format: html
+editor: visual
+---
+
+# ANOVA - DBC
+
+## Delineamento em Blocos Casualisados
+
+Hoje iremos trabalhar com Delineamento Blocos Casualisados (DBC)
+
+Para trabalhar com blocos casualizados vamos tratar os Tratamentos e os Blocos como fatores.
+
+```{r}
+library(tidyverse)
+library(gsheet)
+soja <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=866852711")
+soja <- soja |> 
+  mutate(TRAT = as.factor(TRAT),
+         BLOCO = as.factor(BLOCO))
+```
+
+```{r}
+theme_set(theme_bw())
+```
+
+Vamos plotar as os gráficos para observar se há diferença entre os tratamentos. Colocamos a média e o intervalo de confiança, o bootstrap aprende a média e o intervalo de confiança. #FALTOU PLOTAR OS DEMAIS#
+
+```{r}
+dfc <- soja |> 
+  ggplot(aes(TRAT, DFC ))+
+  geom_jitter(width = 0.05, color = "gray70")+
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "black", alpha = 0.5)
+dfc
+
+fer <- soja |> 
+  ggplot(aes(TRAT, FER ))+
+  geom_jitter(width = 0.05, color = "gray70")+
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "black", alpha = 0.5)
+fer
+
+prod <- soja |> 
+  ggplot(aes(TRAT, PROD ))+
+  geom_jitter(width = 0.05, color = "gray70")+
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "black", alpha = 0.5)
+prod
+#library(r4pde)
+library(patchwork)
+(dfc | fer | prod)
+
+```
+
+Anova DBC
+
+Mesmo não tendo efeito de bloco, deixa-se pois o experimento foi delineado em Blocos Casualisados.
+
+```{r}
+aov_dfc <- lm(DFC ~ TRAT + BLOCO,
+              data = soja)
+anova(aov_dfc)
+```
+
+```{r}
+library(performance)
+check_heteroscedasticity(aov_dfc)
+check_normality(aov_dfc)
+
+library(emmeans)
+medias_dfc <- emmeans(aov_dfc, ~TRAT)
+medias_dfc
+pwpm(medias_dfc)
+
+library(multcomp)
+cld(medias_dfc, Letters = LETTERS)
+```
+
+FERRUGEM
+
+```{r}
+aov_fer <- lm(FER ~ TRAT + BLOCO,
+              data = soja)
+anova(aov_fer)
+
+library(performance)
+check_heteroscedasticity(aov_fer)
+check_normality(aov_fer)
+
+#Transforação
+
+library(DHARMa)
+plot(simulateResiduals(aov_fer))
+
+library(emmeans)
+medias_fer <- emmeans(aov_fer, ~TRAT, type = "response")
+medias_fer
+pwpm(medias_fer)
+
+library(multcomp)
+cld(medias_fer, Letters = LETTERS)
+```
+
+Transformação Box-Cox
+
+```{r}
+b <- boxcox(lm(soja$FER ~1))
+lambda <- b$x[which.max(b$y)]
+lambda
+soja$FER2 <-(soja$FER ^lambda -1)/lambda
+```
+
+```{r}
+aov_fer2 <- lm(FER2 ~ TRAT + BLOCO,
+              data = soja)
+anova(aov_fer2)
+
+library(performance)
+check_heteroscedasticity(aov_fer2)
+check_normality(aov_fer2)
+
+#Transforação
+
+library(DHARMa)
+plot(simulateResiduals(aov_fer2))
+
+library(emmeans)
+medias_fer2 <- emmeans(aov_fer2, ~TRAT, type = "response")
+medias_fer2
+pwpm(medias_fer2)
+
+library(multcomp)
+cld(medias_fer2, Letters = LETTERS)
+```
+
+PRODUTIVIDADE
+
+```{r}
+aov_prod <- lm(PROD ~ TRAT + BLOCO,
+              data = soja)
+anova(aov_prod)
+
+library(performance)
+check_heteroscedasticity(aov_prod)
+check_normality(aov_prod)
+
+#Transforação
+
+
+library(emmeans)
+medias_prod <- emmeans(aov_prod, ~TRAT)
+medias_prod
+pwpm(medias_prod)
+
+library(multcomp)
+cld(medias_prod, Letters = LETTERS)
+medias_prod_grupo<- cld(medias_prod, Letters = LETTERS)
+```
+
+Plot dos rerultados - Uma tabela ficaria melhor
+
+```{r}
+df_prod <- data.frame(medias_prod_grupo)
+df_prod |> 
+  ggplot(aes(TRAT, emmean))+
+  geom_point()+
+  ylim(3000,6500)+
+  geom_errorbar(aes(min = lower.CL, 
+                    max = upper.CL),
+                width = 0.1)+
+  annotate(geom = "text", x = 1.2, y = 4200,
+           label = "A")
+
+knitr::kable(df_prod |> dplyr::select(TRAT, emmean, .group))
+library(writexl)
+write_xlsx(df_prod, "df.xlsx")
+```
+
+DADOS IRRIGAÇÃO
+
+```{r}
+library(tidyverse)
+library(gsheet)
+curve <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=1807247585")
+```
+
+```{r}
+
+curve |> 
+  ggplot(aes(x= day, y= severity, color = Irrigation, shape = Irrigation))+
+  geom_line()+
+  geom_point()
+  
+```
+
+```{r}
+library(epifitter)
+curve2 <- curve |>
+  group_by(Irrigation, rep) |> 
+  summarise(aacpd = AUDPC(day, severity)) #não está dando certo rever
+
+m_curve <- lm(aacpd ~ Irrigation + factor(rep),
+              data = curve2)
+
+anova(m_curve)
+
+library(agricolae)
+cv.model(m_curve)
+```
+
+Eficacia de controle, quanto foi reduzido do tratamento com maior valor em porcentagem. (***Dá para usar para o café ao invés de AACPD***)

@@ -1,0 +1,14 @@
+"0","pyra2 <- pyra |> "
+"0","  group_by(code, state, dose) |> "
+"0","  summarise(mean_germination = mean(germination))"
+"1","[38;5;250m`summarise()` has grouped output by 'code', 'state'.
+You can override using the `.groups` argument.[39m
+"
+"0","pyra2 |> "
+"0","  ggplot(aes(dose, mean_germination))+"
+"0","  geom_point()+"
+"0","  geom_smooth(span = 3, se = FALSE)+"
+"0","  facet_wrap(~code)"
+"1","[38;5;250m`geom_smooth()` using method = 'loess' and formula = 'y
+~ x'[39m
+"

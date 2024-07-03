@@ -1,0 +1,10 @@
+"0","library(r4pde)"
+"0","wm <- WhiteMoldSoybean"
+"0",""
+"0","wm |> "
+"0","  ggplot(aes(inc, yld, group = factor(study)))+"
+"0","  geom_point()+"
+"0","  #facet_wrap(~ study)+"
+"0","  geom_smooth(method = ""lm"", se = F)"
+"1","[38;5;250m`geom_smooth()` using formula = 'y ~ x'[39m
+"

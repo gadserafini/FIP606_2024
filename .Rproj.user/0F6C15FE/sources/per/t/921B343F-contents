@@ -1,0 +1,139 @@
+---
+title: "aula8"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+## Anova com blocos casualizados
+
+### Importa 
+
+```{r}
+library(tidyverse)
+library(gsheet)
+soja <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=866852711")
+soja <- soja |> 
+  mutate(TRAT = as.factor(TRAT),
+         BLOCO = as.factor(BLOCO))
+```
+
+### Visualiza
+
+```{r}
+theme_set(theme_r4pde())
+dfc <- soja |> 
+  ggplot(aes(TRAT, DFC ))+
+  geom_jitter(width = 0.05, color = "gray70")+
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "black", alpha = 0.5)
+dfc
+
+fer <- soja |> 
+  ggplot(aes(TRAT, FER ))+
+  geom_jitter(width = 0.05, color = "gray70")+
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "black", alpha = 0.5)
+fer
+
+prod <- soja |> 
+  ggplot(aes(TRAT, PROD ))+
+  geom_jitter(width = 0.05, color = "gray70")+
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "black", alpha = 0.5)
+prod
+library(r4pde)
+library(patchwork)
+(dfc | fer | prod)
+```
+
+### anova DFC
+
+```{r}
+aov_dfc <- lm(DFC ~ TRAT + BLOCO,
+              data = soja)
+anova(aov_dfc)
+library(performance)
+check_heteroscedasticity(aov_dfc)
+check_normality(aov_dfc)
+library(emmeans)
+medias_dfc <- emmeans(aov_dfc, ~ TRAT)
+medias_dfc
+pwpm(medias_dfc)
+library(multcomp)
+cld2 <- cld(medias_dfc, Letters = LETTERS)
+write_xlsx(cld2, "dfc.xlsx")
+```
+
+```{r}
+aov_fer <- lm(FER2 ~ TRAT + BLOCO,
+              data = soja)
+anova(aov_fer)
+library(performance)
+check_heteroscedasticity(aov_fer)
+check_normality(aov_fer)
+library(emmeans)
+medias_fer <- emmeans(aov_fer, ~ TRAT, type ="response")
+medias_fer
+pwpm(medias_fer)
+library(multcomp)
+cld(medias_fer, Letters = LETTERS)
+
+b <- boxcox(lm(soja$FER  ~1))
+lambda <- b$x[which.max(b$y)]
+lambda 
+soja$FER2 <- (soja$FER ^ lambda - 1) / lambda
+
+```
+
+```{r}
+aov_prod <- lm(PROD ~ TRAT + BLOCO,
+              data = soja)
+library(agricolae)
+cv.model(aov_prod)
+anova(aov_prod)
+library(performance)
+check_heteroscedasticity(aov_prod)
+check_normality(aov_prod)
+library(emmeans)
+medias_prod <- emmeans(aov_prod, ~ TRAT)
+medias_prod
+pwpm(medias_prod)
+library(multcomp)
+medias_prod_grupo <- cld(medias_prod, Letters = LETTERS)
+```
+
+```{r}
+df_prod <- data.frame(medias_prod_grupo)
+df_prod |> 
+  ggplot(aes(TRAT, emmean))+
+  geom_point()+
+  ylim(3000,6500)+
+  geom_errorbar(aes(min = lower.CL, 
+                    max = upper.CL),
+                width = 0.1)+
+  annotate(geom = "text", x = 1.2, y = 4200,
+           label = "A")
+
+knitr::kable(df_prod |> dplyr::select(TRAT, emmean, .group))
+library(writexl)
+write_xlsx(df_prod, "df.xlsx")
+```
+
+## AACPD
+
+```{r}
+curve <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=1807247585")
+
+library(epifitter)
+curve2 <- curve |> 
+  group_by(Irrigation, rep) |> 
+  summarise(aacpd = AUDPC(day, severity))
+
+m_curve <- lm(aacpd ~ Irrigation + factor(rep),
+              data = curve2)
+anova(m_curve)
+library(agricolae)
+cv.model(m_curve)
+
+```
+
+
+

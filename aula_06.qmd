@@ -1,11 +1,11 @@
 ---
-title: "Análise Estatística: Estatística inferencial"
+title: "Análise Estatística: Estatística inferencial - Parte 1"
 author: "Gabriel A. D. Serafini"
 format: html
 editor: visual
 ---
 
-# Estatística Inferencial : Testes de média
+# Estatística Inferencial
 
 ## Importando os dados
 

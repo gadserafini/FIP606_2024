@@ -1,0 +1,165 @@
+"0","dfc <- soja |> "
+"0","  ggplot(aes(TRAT, DFC ))+"
+"0","  geom_jitter(width = 0.05, color = ""gray70"")+"
+"0","  stat_summary(fun.data = ""mean_cl_boot"", size =0.5, color = ""black"", alpha = 0.5)"
+"0","dfc"
+"1","[34mℹ[39m The package ""Hmisc"" is required.
+[31m✖[39m Would you like to install it?
+"
+"1",""
+"1","
+"
+"1","1: Yes"
+"1","
+"
+"1","2: No"
+"1","
+"
+"1",""
+"1","
+"
+"0","1"
+"2",""
+"2","[36mℹ[39m Loading metadata database"
+"2","[32m✔[39m Loading metadata database ... done"
+"2","
+"
+"2",""
+"2"," Found [30m[48;5;249m 1 [49m[39m deps for [30m[48;5;249m 0/1 [49m[39m pkgs [⠋] Resolving standard (CRAN/BioC) packages"
+"2"," Found [30m[48;5;249m 1 [49m[39m deps for [30m[48;5;249m 0/1 [49m[39m pkgs [⠙] Resolving standard (CRAN/BioC) packages"
+"2"," Found [30m[48;5;249m 117 [49m[39m deps for [30m[48;5;249m 1/1 [49m[39m pkgs [⠹] Resolving standard (CRAN/BioC) packages"
+"2","                                                                             "
+"2"," 
+"
+"2","→ Will [3m[3minstall[3m[23m 6 packages.
+"
+"2","→ Will [3m[3mdownload[3m[23m 6 CRAN packages (9.06 MB).
+"
+"2","[90m+ [39m[34mcheckmate[39m   2.3.1 [dl] [90m(746.54 kB)[39m
+[90m+ [39m[34mFormula[39m     1.2-5 [dl] [90m(161.37 kB)[39m
+[90m+ [39m[34mgridExtra[39m   2.3   [dl] [90m(1.11 MB)[39m
+[90m+ [39m[34mHmisc[39m       5.1-3 [dl] [90m(3.59 MB)[39m
+[90m+ [39m[34mhtmlTable[39m   2.4.2 [dl] [90m(430.58 kB)[39m
+[90m+ [39m[34mviridis[39m     0.6.5 [dl] [90m(3.01 MB)[39m
+"
+"2","[36mℹ[39m Getting 6 pkgs (9.06 MB)
+"
+"2",""
+"2","          [32m⸨             ⸩[39m   0% | 0/6 pkg | ETA ??s  | Connecting..."
+"2","          [32m⸨             ⸩[39m   0% | 0/6 pkg | ETA ??s  | Getting Formula, Hmisc, checkmate, gridExtra, htmlTable and viri…"
+"2","          [32m⸨             ⸩[39m   0% | 0/6 pkg | ETA ??s  | Getting Formula, Hmisc, checkmate, gridExtra, htmlTable and viri…"
+"2","          [32m⸨             ⸩[39m   0% | 0/6 pkg | ETA ??s  | Getting Formula, Hmisc, checkmate, gridExtra, htmlTable and viri…"
+"2"," 138 kB/s [32m⸨             ⸩[39m   1% | 0/6 pkg | ETA ~1m    | Getting Formula, Hmisc, checkmate, gridExtra, htmlTable and vi…"
+"2"," 343 kB/s [32m⸨             ⸩[39m   2% | 0/6 pkg | ETA ~25.8s | Getting Formula, Hmisc, checkmate, gridExtra, htmlTable and vi…"
+"2"," 431 kB/s [32m⸨             ⸩[39m   4% | 0/6 pkg | ETA ~20.3s | Getting Formula, Hmisc, checkmate, gridExtra, htmlTable and vi…"
+"2"," 720 kB/s [32m⸨             ⸩[39m   7% | 0/6 pkg | ETA ~11.7s | Getting Formula, Hmisc, checkmate, gridExtra, htmlTable and vi…"
+"2","                                                                                                                        "
+"2","[32m✔[39m Got [34m[34mFormula[34m[39m 1.2-5 (i386+x86_64-w64-mingw32) (161.37 kB)
+"
+"2"," 720 kB/s [32m⸨             ⸩[39m   7% | 0/6 pkg | ETA ~11.7s | Getting Formula, Hmisc, checkmate, gridExtra, htmlTable and vi…"
+"2"," 1.3 MB/s [32m⸨█            ⸩[39m  14% | 1/6 pkg | ETA ~5.9s  | Getting Formula, Hmisc, checkmate, gridExtra, htmlTable and vi…"
+"2"," 2.2 MB/s [32m⸨███          ⸩[39m  25% | 1/6 pkg | ETA ~3.1s  | Getting Hmisc, checkmate, gridExtra, htmlTable and viridis     "
+"2","                                                                                                                   "
+"2","[32m✔[39m Got [34m[34mhtmlTable[34m[39m 2.4.2 (i386+x86_64-w64-mingw32) (430.00 kB)
+"
+"2"," 2.2 MB/s [32m⸨███          ⸩[39m  25% | 1/6 pkg | ETA ~3.1s  | Getting Hmisc, checkmate, gridExtra, htmlTable and viridis"
+"2"," 3.1 MB/s [32m⸨█████        ⸩[39m  41% | 2/6 pkg | ETA ~1.7s  | Getting Hmisc, checkmate, gridExtra, htmlTable and viridis"
+"2","                                                                                                                   "
+"2","[32m✔[39m Got [34m[34mcheckmate[34m[39m 2.3.1 (x86_64-w64-mingw32) (746.27 kB)
+"
+"2"," 3.1 MB/s [32m⸨█████        ⸩[39m  41% | 2/6 pkg | ETA ~1.7s  | Getting Hmisc, checkmate, gridExtra, htmlTable and viridis"
+"2"," 3.2 MB/s [32m⸨█████        ⸩[39m  44% | 3/6 pkg | ETA ~1.6s  | Getting Hmisc, gridExtra and viridis                      "
+"2","                                                                                             "
+"2","[32m✔[39m Got [34m[34mgridExtra[34m[39m 2.3 (i386+x86_64-w64-mingw32) (1.11 MB)
+"
+"2"," 3.2 MB/s [32m⸨█████        ⸩[39m  44% | 3/6 pkg | ETA ~1.6s  | Getting Hmisc, gridExtra and viridis"
+"2"," 4.0 MB/s [32m⸨███████      ⸩[39m  60% | 4/6 pkg | ETA <1s    | Getting Hmisc and viridis           "
+"2"," 4.2 MB/s [32m⸨████████     ⸩[39m  69% | 4/6 pkg | ETA <1s    | Getting Hmisc and viridis"
+"2"," 3.9 MB/s [32m⸨████████     ⸩[39m  69% | 4/6 pkg | ETA <1s    | Getting Hmisc and viridis"
+"2"," 4.2 MB/s [32m⸨██████████   ⸩[39m  79% | 4/6 pkg | ETA <1s    | Getting Hmisc and viridis"
+"2","                                                                                  "
+"2","[32m✔[39m Got [34m[34mviridis[34m[39m 0.6.5 (i386+x86_64-w64-mingw32) (3.01 MB)
+"
+"2"," 4.2 MB/s [32m⸨██████████   ⸩[39m  79% | 4/6 pkg | ETA <1s    | Getting Hmisc and viridis"
+"2"," 4.1 MB/s [32m⸨██████████   ⸩[39m  81% | 5/6 pkg | ETA <1s    | Getting Hmisc            "
+"2"," 4.0 MB/s [32m⸨██████████   ⸩[39m  84% | 5/6 pkg | ETA <1s    | Getting Hmisc"
+"2"," 3.9 MB/s [32m⸨███████████  ⸩[39m  87% | 5/6 pkg | ETA <1s    | Getting Hmisc"
+"2"," 3.9 MB/s [32m⸨███████████  ⸩[39m  91% | 5/6 pkg | ETA <1s    | Getting Hmisc"
+"2"," 3.7 MB/s [32m⸨███████████  ⸩[39m  91% | 5/6 pkg | ETA <1s    | Getting Hmisc"
+"2"," 3.7 MB/s [32m⸨████████████ ⸩[39m  94% | 5/6 pkg | ETA <1s    | Getting Hmisc"
+"2"," 3.6 MB/s [32m⸨████████████ ⸩[39m  97% | 5/6 pkg | ETA <1s    | Getting Hmisc"
+"2","                                                                      "
+"2","[32m✔[39m Got [34m[34mHmisc[34m[39m 5.1-3 (x86_64-w64-mingw32) (3.61 MB)
+"
+"2"," 3.6 MB/s [32m⸨████████████ ⸩[39m  97% | 5/6 pkg | ETA <1s    | Getting Hmisc"
+"2","                                                                      "
+"2","[32m✔[39m Downloaded 6 packages (9.07 MB) in 2.5s
+"
+"2","Installing..."
+"2","[32m⸨███████████▒▒⸩[39m | 📦  65/65     | ✅  59/65     | "
+"2","[32m⸨███████████▒▒⸩[39m | 📦  65/65     | ✅  59/65 ⠸ 1 | installing Formula"
+"2","[32m⸨███████████▒▒⸩[39m | 📦  65/65     | ✅  59/65 ⠴ 2 | installing Formula, Hmisc"
+"2","[32m⸨███████████▒▒⸩[39m | 📦  65/65     | ✅  59/65 ⠧ 3 | installing Formula, Hmisc, checkmate"
+"2","[32m⸨███████████▒▒⸩[39m | 📦  65/65     | ✅  59/65 ⠏ 4 | installing Formula, Hmisc, checkmate, gridExtra"
+"2","[32m⸨███████████▒▒⸩[39m | 📦  65/65     | ✅  59/65 ⠙ 5 | installing Formula, Hmisc, checkmate, gridExtra, htmlTable"
+"2","[32m⸨███████████▒▒⸩[39m | 📦  65/65     | ✅  59/65 ⠸ 6 | installing Formula, Hmisc, checkmate, gridExtra, htmlTable, viridis"
+"2","                                                                                                                      "
+"2","[32m✔[39m Installed [34m[34mFormula[34m[39m 1.2-5  [38;5;247m[38;5;247m(171ms)[38;5;247m[39m
+"
+"2","[32m⸨███████████▒▒⸩[39m | 📦  65/65     | ✅  59/65 ⠸ 6 | installing Formula, Hmisc, checkmate, gridExtra, htmlTable, viridis"
+"2","[32m⸨███████████▒▒⸩[39m | 📦  65/65     | ✅  59/65 ⠴ 6 | installing Formula, Hmisc, checkmate, gridExtra, htmlTable, viridis"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  60/65 ⠧ 5 | installing Hmisc, checkmate, gridExtra, htmlTable, viridis         "
+"2","                                                                                                             "
+"2","[32m✔[39m Installed [34m[34mcheckmate[34m[39m 2.3.1  [38;5;247m[38;5;247m(184ms)[38;5;247m[39m
+"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  60/65 ⠧ 5 | installing Hmisc, checkmate, gridExtra, htmlTable, viridis"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  60/65 ⠏ 5 | installing Hmisc, checkmate, gridExtra, htmlTable, viridis"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  61/65 ⠙ 4 | installing Hmisc, gridExtra, htmlTable, viridis           "
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  61/65 ⠸ 4 | installing Hmisc, gridExtra, htmlTable, viridis"
+"2","                                                                                                  "
+"2","[32m✔[39m Installed [34m[34mgridExtra[34m[39m 2.3  [38;5;247m[38;5;247m(221ms)[38;5;247m[39m
+"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  61/65 ⠸ 4 | installing Hmisc, gridExtra, htmlTable, viridis"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  61/65 ⠴ 4 | installing Hmisc, gridExtra, htmlTable, viridis"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  62/65 ⠧ 3 | installing Hmisc, htmlTable, viridis           "
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  62/65 ⠏ 3 | installing Hmisc, htmlTable, viridis"
+"2","                                                                                       "
+"2","[32m✔[39m Installed [34m[34mhtmlTable[34m[39m 2.4.2  [38;5;247m[38;5;247m(254ms)[38;5;247m[39m
+"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  62/65 ⠏ 3 | installing Hmisc, htmlTable, viridis"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  62/65 ⠙ 3 | installing Hmisc, htmlTable, viridis"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  63/65 ⠸ 2 | installing Hmisc, viridis           "
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  63/65 ⠴ 2 | installing Hmisc, viridis"
+"2","                                                                            "
+"2","[32m✔[39m Installed [34m[34mHmisc[34m[39m 5.1-3  [38;5;247m[38;5;247m(329ms)[38;5;247m[39m
+"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  63/65 ⠴ 2 | installing Hmisc, viridis"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  63/65 ⠧ 2 | installing Hmisc, viridis"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  64/65 ⠏ 1 | installing viridis       "
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  64/65 ⠙ 1 | installing viridis"
+"2","                                                                     "
+"2","[32m✔[39m Installed [34m[34mviridis[34m[39m 0.6.5  [38;5;247m[38;5;247m(347ms)[38;5;247m[39m
+"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  64/65 ⠙ 1 | installing viridis"
+"2","[32m⸨████████████▒⸩[39m | 📦  65/65     | ✅  64/65 ⠸ 1 | installing viridis"
+"2","                                                                     "
+"2","[32m✔[39m 1 pkg + 64 deps: kept 52, added 6, dld 6 (9.07 MB) [38;5;249m[38;5;249m[8.5s][38;5;249m[39m
+"
+"2","Registered S3 methods overwritten by 'htmltools':
+  method               from         
+  print.html           tools:rstudio
+  print.shiny.tag      tools:rstudio
+  print.shiny.tag.list tools:rstudio
+"
+"2","Registered S3 method overwritten by 'htmlwidgets':
+  method           from         
+  print.htmlwidget tools:rstudio
+"
+"2","Registered S3 method overwritten by 'rmarkdown':
+  method         from
+  print.paged_df     
+"
+"2","Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+"

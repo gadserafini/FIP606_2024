@@ -1,0 +1,30 @@
+"0","library(plotly)"
+"2","Aviso:"
+"2"," pacote ‘plotly’ foi compilado no R versão 4.4.1
+"
+"2","
+Anexando pacote: ‘plotly’
+
+"
+"2","O seguinte objeto é mascarado por ‘package:ggplot2’:
+
+    last_plot
+
+"
+"2","O seguinte objeto é mascarado por ‘package:stats’:
+
+    filter
+
+"
+"2","O seguinte objeto é mascarado por ‘package:graphics’:
+
+    layout
+
+"
+"0","bra <- ggplot(BRA)+"
+"0","  geom_sf(fill = ""white"","
+"0","          color = ""black"")+"
+"0","  geom_point(data = sbr, aes(longitude,latitude),"
+"0","             color = ""red"")"
+"0",""
+"0","ggplotly(bra)"

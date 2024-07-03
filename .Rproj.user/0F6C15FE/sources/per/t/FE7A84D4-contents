@@ -1,0 +1,410 @@
+---
+title: "Aula 09"
+author: "Gabriel A. D. Serafini"
+format: html
+editor: visual
+---
+
+## Parcela subdividida
+
+Modelo misto, um fator fixo e um aleatório.
+
+```{r}
+library(tidyverse)
+theme_set(theme_bw())
+```
+
+Chamando os dados
+
+```{r}
+library(gsheet)
+milho <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=1345524759")
+```
+
+Plotando gráfico
+
+```{r}
+indx <- milho |> 
+  ggplot(aes(method, index ))+
+  geom_jitter(width = 0.05, color = "gray70")+
+  facet_wrap(~ hybrid)+ #Sem o facet_wrap fica somente por tratamento.
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "black", alpha = 0.5)
+indx
+
+
+```
+
+### Modelo para subdividida
+
+```{r}
+library(lme4)
+library(car)
+
+milho <- milho |> 
+  mutate(block = as.factor(block))
+#lmer é o modelo linear do lme4
+mix2 <- lmer(index ~ hybrid*method + block+ (1|block/hybrid), data = milho)
+
+Anova(mix2)
+```
+
+Houve interação significativa entre hibridos e metodos.
+
+```{r}
+library(performance)
+check_normality(mix2)
+check_heteroscedasticity(mix2)
+```
+
+```{r}
+library(DHARMa)
+plot(simulateResiduals(mix2))
+```
+
+Transformação - Raiz quadrada
+
+```{r}
+milho <- milho |> 
+  mutate(block = as.factor(block))
+#lmer é o modelo linear do lme4
+mix3 <- lmer(sqrt(index) ~ hybrid*method + block+ (1|block/hybrid), data = milho)
+
+Anova(mix2)
+```
+
+```{r}
+library(performance)
+check_normality(mix3)
+check_heteroscedasticity(mix3)
+```
+
+```{r}
+library(DHARMa)
+plot(simulateResiduals(mix3))
+```
+
+```{r}
+qqnorm(residuals(mix3))
+qqline(residuals(mix3))
+hist(residuals(mix3))
+```
+
+Calcular as médias
+
+```{r}
+library(emmeans)
+print("HIBRIDO X METODO")
+medias_milho1 <- emmeans(mix3, ~ hybrid|method, type = "response")
+medias_milho1
+print("METODO X HIBRIDO")
+medias_milho2 <- emmeans(mix3, ~ method|hybrid, type = "response")
+medias_milho2
+```
+
+```{r}
+library(multcomp)
+cld(medias_milho1, Letters = LETTERS)
+cld(medias_milho2, Letters = letters)
+```
+
+Agora para produtividade
+
+```{r}
+mix4 <- lmer(sqrt(yield) ~ hybrid*method + block+ (1|block/hybrid), data = milho)
+
+Anova(mix4)
+library(performance)
+check_normality(mix4)
+check_heteroscedasticity(mix4)
+```
+
+```{r}
+plot(simulateResiduals(mix4))
+```
+
+```{r}
+print("HIBRIDO X METODO")
+medias_milho3 <- emmeans(mix4, ~ hybrid|method, type = "response")
+medias_milho3
+print("METODO X HIBRIDO")
+medias_milho4 <- emmeans(mix4, ~ method|hybrid, type = "response")
+medias_milho4
+```
+
+```{r}
+cld(medias_milho3, Letters = LETTERS)
+cld(medias_milho4, Letters = letters)
+```
+
+NOVO CONJUNTO DE DADOS
+
+```{r}
+estande <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=401662555")
+```
+
+```{r}
+nplan <- estande |> 
+  ggplot(aes(exp, nplants ))+
+  geom_jitter(width = 0.05, color = "gray70")+
+  facet_wrap(~ trat)+ #Sem o facet_wrap fica somente por tratamento.
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "black", alpha = 0.5)
+nplan
+```
+
+```{r}
+nplan <- estande |> 
+  ggplot(aes(trat, nplants ))+
+  geom_jitter(width = 0.05, color = "gray70")+
+  facet_wrap(~ exp)+ #Sem o facet_wrap fica somente por tratamento.
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "black", alpha = 0.5)+
+  geom_smooth(method = "lm", se = F, color = "black")
+nplan
+```
+
+```{r}
+nplan <- estande |> 
+  ggplot(aes(trat, nplants ))+
+  geom_jitter(width = 0.05, color = "gray70")+
+  facet_wrap(~ exp)+ #Sem o facet_wrap fica somente por tratamento.
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "black", alpha = 0.5)+
+  geom_smooth(method = "lm", se = F, color = "black")
+nplan
+```
+
+A cada acrescimo tem a queda de aproximadamene, 24 plantas (trat - 0.24)
+
+```{r}
+exp1 <- estande |> 
+  filter(exp ==1)
+
+exp1 |> 
+  ggplot(aes(trat, nplants))+
+  geom_point()+
+  geom_smooth(se = F, method = "lm")
+
+lm1 <- lm(nplants ~ trat,
+          data = exp1)
+summary(lm1)
+```
+
+```{r}
+exp2 <- estande |> 
+  filter(exp ==2)
+
+exp2 |> 
+  ggplot(aes(trat, nplants))+
+  geom_point()+
+  geom_smooth(se = F, method = "lm")
+
+lm2 <- lm(nplants ~ trat,
+          data = exp2)
+summary(lm2)
+
+hist(residuals(lm2))
+```
+
+59% da variabilidade de y é explicado por x.
+
+```         
+Adjusted R-squared:  0.5907
+```
+
+O R² diz o quanto da variabilidade é explicada pelo modelo. Quanto da da variabilidade de y é explicado por x.
+
+```{r}
+exp3 <- estande |> 
+  filter(exp ==3)
+
+exp3 |> 
+  ggplot(aes(trat, nplants))+
+  geom_point()+
+  geom_smooth(se = F, method = "lm")
+
+lm3 <- lm(nplants ~ trat,
+          data = exp3)
+summary(lm3)
+
+hist(residuals(lm3))
+```
+
+usando glm
+
+```{r}
+glm1 <- glm(nplants ~ trat,
+            family = "gaussian",
+            data = exp1)
+glm1
+summary(glm1)
+AIC(glm1)
+```
+
+```{r}
+print("-=-=-=- GAUSSIAN -=-=-=-")
+glm2 <- glm(nplants ~ trat,
+            family = "gaussian",
+            data = exp2)
+glm2
+summary(glm2)
+AIC(glm2)
+
+print("-=-=-=- POISSON -=-=-=-")
+glm2b <- glm(nplants ~ trat,
+            family = "poisson",
+            data = exp2)
+glm2b
+summary(glm2b)
+AIC(glm2b)
+```
+
+```{r}
+print("-=-=-=- GAUSSIAN -=-=-=-")
+glm3 <- glm(nplants ~ trat,
+            family = "gaussian",
+            data = exp3)
+glm3
+summary(glm3)
+AIC(glm3)
+
+print("-=-=-=- POISSON -=-=-=-")
+glm3b <- glm(nplants ~ trat,
+            family = "poisson",
+            data = exp3)
+glm3b
+summary(glm3b)
+AIC(glm3b)
+```
+
+MODELO MISTOS -\> quando tem efeito aleatório o ideal é ter mais de 6 ou 7 níveis de experimentos diferentes. Aqui temos locais aleatórios diferentes.\
+Efeito alétório dos tratamentos no experimento -\> (trat\|exp).
+
+Modelo mais robusto que da mais informações, em bloco, como é aleatório pode ser feito também. O efeito é baseado em uma amostra maior, por isso é mais robusto.
+
+```{r}
+print("-=-=-=- GAUSSIAN -=-=-=-")
+glmer3 <- glmer(nplants ~ trat + (trat|exp),
+            family = "gaussian",
+            data = estande)
+glmer3
+summary(glmer3)
+AIC(glmer3)
+
+print("-=-=-=- POISSON -=-=-=-")
+glmer3b <- glmer(nplants ~ trat + (trat|exp),
+            family = "poisson",
+            data = estande)
+glmer3b
+summary(glmer3b)
+AIC(glmer3b)
+```
+
+Pacote do professor
+
+```{r}
+library(remotes)
+remotes::install_github("emdelponte/r4pde")
+
+```
+
+```{r}
+library(lme4)
+glm3 <- glmer(nplants ~ trat + (trat | exp), family = "gaussian",
+            data = estande)
+summary(glm3)
+AIC(glm3)
+
+glmb3 <- glmer(nplants ~ trat + (trat | exp), family = poisson(link = "log"), 
+             data = estande)
+summary(glmb3)
+AIC(glmb3)
+```
+
+```{r}
+library(r4pde)
+wm <- WhiteMoldSoybean
+
+wm |> 
+  ggplot(aes(inc, yld, group = factor(study)))+
+  geom_point()+
+  #facet_wrap(~ study)+
+  geom_smooth(method = "lm", se = F)
+ theme_minimal()
+ 
+mofo1 <- lm(yld ~ inc,
+            data = wm)
+
+summary(mofo1) #no slope, inc perde -9kg por percentual
+```
+
+Com o tidy tem como fazer váras regressões
+
+```{r}
+library(broom)
+mofo1 <- wm |> 
+  group_by(study) |> 
+  do(tidy(lm(.$yld ~ .$inc), conf.int= TRUE))
+mofo1
+```
+
+```{r}
+mofo2 <- lm(yld ~ inc,
+            data = wm)
+
+summary(mofo2) #no slope, inc perde -9kg por percentual
+```
+
+```{r}
+mofo2 <- wm |> 
+  group_by(study) |> 
+  do(tidy(lm(.$yld ~ .$inc), conf.int = TRUE))
+mofo2
+```
+
+```{r}
+library(lme4)
+mofo3 <- lmer(yld ~inc +(inc|study), data = wm)
+```
+
+```{r}
+df <- mofo2 |> filter(term == ".$inc")
+mean(df$estimate)
+
+p1 <- mofo2 |> 
+  filter(term == "(Intercept)") |> 
+           ggplot(aes(x = estimate))+
+           geom_histogram(bins = 8, color = "white", fill = "gray")+
+           theme_r4pde()+
+           labs(x = "Intercept", y = "frequency")
+p2 <- mofo2 |> 
+  filter(term == ".$inc") |> 
+           ggplot(aes(x = estimate))+
+           geom_histogram(bins = 8, color = "white", fill = "gray")+
+           theme_r4pde()+
+           labs(x = "Slopes", y = "frequency")
+library(patchwork)
+p1+p2
+
+```
+
+```{r}
+
+p3 <- mofo2 |> 
+  filter(term == "(Intercept)") |> 
+  ggplot(aes(x = estimate))+
+  geom_histogram(bins = 8, color = "white", fill = "gray50")+
+  theme_r4pde()+
+  labs(x = "Intercept", y = "Frequency")
+
+df <- mofo2 |> filter(term == ".$inc")
+mean(df$estimate)
+
+p4 <- df |> 
+  filter(term == ".$inc") |> 
+  ggplot(aes(x = estimate))+
+  geom_histogram(bins = 8, color = "white", fill = "gray50")+
+  theme_r4pde()+
+  labs(x = "Slope", y = "Frequency")
+
+
+library(patchwork)
+p3 | p4
+```

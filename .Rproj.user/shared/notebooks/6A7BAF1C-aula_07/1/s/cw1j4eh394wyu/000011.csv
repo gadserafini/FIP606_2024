@@ -1,0 +1,6 @@
+"0","library(ggplot2)"
+"0","inseticida |>"
+"0","  ggplot(aes(x = spray, y = count))+"
+"0","  geom_boxplot()+"
+"0","  geom_jitter()+"
+"0","  theme_bw()"

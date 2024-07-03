@@ -1,0 +1,4 @@
+"0","remotes::install_github(""ropensci/rnaturalearthhires"")"
+"2","Skipping install of 'rnaturalearthhires' from a github remote, the SHA1 (dd1e210c) has not changed since last install.
+  Use `force = TRUE` to force installation
+"

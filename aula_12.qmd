@@ -1,0 +1,127 @@
+---
+title: "Criação de mapas"
+format: html
+editor: visual
+---
+
+# CRIAÇÃO DE MAPAS
+
+```{r}
+remotes::install_github("ropensci/rnaturalearthhires")
+```
+
+```{r}
+library(rnaturalearthhires)
+library(rnaturalearth)
+
+world <- ne_countries()
+
+library(tidyverse)
+BRA <- ne_states(country = "Brazil",
+                 returnclass = "sf")
+
+ggplot(BRA) +
+  geom_sf(fill = "black",
+          color = "yellow",
+          linewigth = 1)
+```
+
+```{r}
+library(r4pde)
+library(ggthemes)
+
+MG <- BRA |> 
+  filter(name_en == "Minas Gerais")
+
+sbr <- RustSoybean
+
+ggplot(BRA)+
+  geom_sf(fill = "white",
+          color = "black",
+          linewidth = 0.1)+
+  geom_point(data = sbr, aes(longitude,latitude),
+             color = "red")#+
+  #theme_map() Retira o fundo
+```
+
+```{r}
+library(ggspatial)
+ggplot(BRA)+
+  geom_sf(fill = "white",
+          color = "black",
+          linewidth = 0.1)+
+  geom_point(data = sbr, aes(longitude,latitude),
+             color = "red")+
+  #theme_map()#+ #Retira o fundo
+  annotation_north_arrow()# biblioteca ggspatial
+```
+
+```{r}
+MG <- BRA |> 
+  filter(name_en == "Minas Gerais")
+
+ggplot(BRA)+
+  geom_sf(fill = "white",
+          color = "black")+
+  geom_sf(data = MG, fill = "yellow")+
+  geom_point(data = sbr, aes(longitude,latitude), color = "red")+
+  theme_map()
+```
+
+```{r}
+library(plotly)
+bra <- ggplot(BRA)+
+  geom_sf(fill = "white",
+          color = "black")+
+  geom_point(data = sbr, aes(longitude,latitude),
+             color = "red")
+
+ggplotly(bra)
+```
+
+```{r}
+library(leaflet)
+leaflet() |> 
+  addTiles() |> 
+  setView(lng = -42.8825, lat = -20.7546, zoom = 15)
+```
+
+```{r}
+library(leaflet)
+leaflet() |> 
+  addProviderTiles(providers$Esri.NatGeoWorldMap) |> 
+  setView(lng = -42.8825, lat = -20.7546, zoom = 5)
+```
+
+```{r}
+library(leaflet)
+leaflet(sbr) |> 
+  addTiles() |> 
+  #setView(lng = -42.8825, lat = -20.7546, zoom = 5) |> #zoom
+  addCircleMarkers(radius = 2)
+```
+
+```{r}
+library(scatterpie)
+library(ggrepel)
+library(gsheet)
+mapa <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1pAIFKsdKxk_UQQXdYwIO-O5NOkYNhpclImJcLziYnk4/edit?usp=sharing")
+
+Bra_2 <- ggplot(BRA) +
+  geom_sf(fill = "gray70", alpha = 0.5, color = "white") +
+  coord_sf()+
+  geom_scatterpie(aes(x = lon, y = lat, r = 0.6), alpha = 0.8, color = NA, data = mapa,
+                  cols = c("DFC",
+                           "MA",
+                           "FER",
+                           "ANTR",
+                           "OIDIO"))+
+  geom_text_repel(data = mapa, aes(lon, lat, label = Local),
+                   size = 2, nudge_x = 0.2, nudge_y = 0.27, color = "gray30") +
+  ggthemes::scale_fill_calc()+
+  ggthemes::theme_map() +
+  labs(x = "Longitude", y = "Latitude", legend = "", fill = "Doença")+
+  theme(legend.position = "bottom", text = element_text(size = 8))
+
+Bra_2
+```

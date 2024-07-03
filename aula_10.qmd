@@ -1,0 +1,188 @@
+---
+title: "Aula 10"
+author: "Gabriel A. D. Serafini"
+format: html
+editor: visual
+---
+
+## Análise de correlação
+
+Correlação é uma associação entre duas variáveis. Um incremento de uma variável modifica a outra.
+
+O r é sempre menor doque o R². O r é menor porque é a raiz de r. r é a força de associação entre x e y.
+
+```{r}
+library(tidyverse)
+theme_set(theme_bw())
+```
+
+```{r}
+library(gsheet)
+imgs <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=373270992")
+```
+
+```{r}
+imgs |> 
+  pivot_longer(3:5, names_to = "method",
+               values_to = "value") |> 
+  ggplot(aes(method, value))+
+  geom_boxplot()
+
+imgs |> 
+  ggplot(aes(Assess, LeafDoctor))+
+  geom_point()+
+  geom_smooth(method = "lm")
+
+```
+
+Criando a matriz de correlação
+
+```{r}
+imgs2 <- imgs[, c("Assess", "LeafDoctor", "ImageJ")]
+
+library(AgroR)
+corgraph(imgs2) 
+
+cor.test(imgs$Assess, imgs$LeafDoctor)
+cor(imgs$Assess, imgs$LeafDoctor)
+```
+
+```{r}
+library(corrplot)
+cor_imgs2 <- cor(imgs2)
+corrplot(cor_imgs2, method = "number", type = "lower")
+```
+
+```{r}
+library(corrplot)
+cor_imgs2 <- cor(imgs2)
+corrplot(cor_imgs2, method = "circle", type = "lower") #Pode ser square tabém, e escolher o type, esse pacote é muito mais customizável. diag False tira a diagonal
+```
+
+Outro conjunto de dados
+
+```{r}
+library(AgroR)
+campo <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=866852711")
+
+campo2 <- campo |> 
+  dplyr::select(DFC, FER, PROD)
+
+corgraph(campo2)
+```
+
+```{r}
+estande <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=401662555")
+
+estande |> 
+  ggplot(aes(trat, nplants))+
+  geom_jitter(width = 0.1, alpha = 0.5)+
+  facet_wrap(~ exp)+
+  stat_summary(fun.data = "mean_cl_boot", size =0.5, color = "blue")+
+ geom_smooth(method = "lm", se = F)
+```
+
+Foi pego os dados "estande"
+
+```{r}
+exp2 <- estande |> 
+  filter(exp == 2)
+
+exp2 |> 
+  ggplot(aes(trat, nplants))+
+  geom_point()+
+  ylim(0,100)+
+  geom_smooth(method= "lm", 
+              se=FALSE, 
+              formula = y ~poly(x,2), color="black")+
+  geom_smooth(method = "lm",
+              se = FALSE)
+```
+
+```{r}
+# modelo linear
+
+exp2$trat2 <- exp2$trat^2 
+  
+# primeira ordem
+lm2 <- lm(nplants ~ trat, 
+          data = exp2)
+# segunda ordem ou quadrático
+lm3 <- lm(nplants ~ trat + trat2 , 
+          data = exp2)
+
+summary(lm2)
+summary(lm3)
+AIC(lm2)
+AIC(lm3)
+```
+
+Quando ajusta o modelo ele já dá as
+
+Elevou ao quadrado para dar um coeficiente a mais, quanto mais coeficiente mais não linear ele fica.
+
+Dois modelos, de primera ordem e de segunda ordem ou quadrado.
+
+Se explica melhor com a quadrada (0,4997) do que com a linear(0,4398) (Verificar os dados)
+
+```{r}
+library(AgroR)
+with(exp2, polynomial(trat,nplants, grau = 2))
+data("phao")
+with(phao, polynomial(dose,comp, grau = 2))
+
+```
+
+Sensibilidade de fungicida (sensibiidade_fungicidas)
+
+```{r}
+library(gsheet)
+pyra <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=465348652")
+
+```
+
+```{r}
+pyra2 <- pyra |> 
+  group_by(code, state, dose) |> 
+  summarise(mean_germination = mean(germination))
+
+pyra2 |> 
+  ggplot(aes(dose, mean_germination))+
+  geom_point()+
+  geom_smooth(span = 3, se = FALSE)+
+  facet_wrap(~code)
+```
+
+Dose bem pequena já cai drásticamente a germinação
+
+```{r}
+library(drc)
+
+isolado165 <- pyra2 |> 
+  filter(code == "165")
+
+drc1 <- drm(mean_germination ~ dose, data = isolado165, fct = LL.3()) #pacote drc tem a função dmr
+
+AIC(drc1)
+plot(drc1)
+
+#esse pacote já tem uma função que cálcula a dose letal a 50 a função ED também dá um intervalo se colocar interval = "delta"
+```
+
+Pacote ec50estimator trabalha com todos os dados, ele faz de todos ao invés de fazer um por um.
+
+```{r}
+library(ec50estimator)
+
+df_ec50 <- estimate_EC50(mean_germination ~ dose, data = pyra2, isolate_col = "code", interval = "delta", fct = drc::LL.3())
+
+df_ec50
+```
+
+```{r}
+df_ec50 |> 
+  ggplot(aes(reorder(ID, Estimate), Estimate))+
+  geom_point()+
+  geom_errorbar(aes(ymin = Lower, ymax = Upper))+
+  coord_flip()
+```

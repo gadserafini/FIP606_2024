@@ -1,0 +1,8 @@
+"0","library(remotes)"
+"2","Aviso:"
+"2"," pacote ‘remotes’ foi compilado no R versão 4.4.1
+"
+"0","remotes::install_github(""emdelponte/r4pde"")"
+"2","Skipping install of 'r4pde' from a github remote, the SHA1 (42e6615b) has not changed since last install.
+  Use `force = TRUE` to force installation
+"

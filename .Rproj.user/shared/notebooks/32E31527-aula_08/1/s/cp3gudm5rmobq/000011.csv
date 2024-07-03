@@ -1,0 +1,90 @@
+"0","aov_fer <- lm(FER ~ TRAT + BLOCO,"
+"0","              data = soja)"
+"0","anova(aov_fer)"
+"1","Analysis of Variance Table
+"
+"1","
+"
+"1","Response: FER"
+"1","
+"
+"1","         "
+"1"," Df"
+"1"," Sum Sq"
+"1"," Mean Sq"
+"1"," F value"
+"1","    Pr(>F)"
+"1","    "
+"1","
+TRAT     "
+"1","  7"
+"1"," 978.87"
+"1"," 139.838"
+"1"," 55.1717"
+"1"," 4.218e-12"
+"1"," ***"
+"1","
+BLOCO    "
+"1","  3"
+"1","   3.84"
+"1","   1.279"
+"1","  0.5045"
+"1","    0.6834"
+"1","    "
+"1","
+Residuals"
+"1"," 21"
+"1","  53.23"
+"1","   2.535"
+"1","        "
+"1","          "
+"1","    "
+"1","
+"
+"1","---
+Signif. codes:  "
+"1",""
+"1","0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1"
+"1","
+"
+"0","library(performance)"
+"0","check_heteroscedasticity(aov_fer)"
+"1","[31mWarning: Heteroscedasticity (non-constant error variance) detected (p < .001).
+[39m"
+"0","check_normality(aov_fer)"
+"1","[31mWarning: Non-normality of residuals detected (p = 0.008).
+[39m"
+"0","#Transforação"
+"0",""
+"0","library(DHARMa)"
+"0","plot(simulateResiduals(aov_fer))"
+"2","qu = 0.25, log(sigma) = -3.082978 : outer Newton did not converge fully.
+"
+"2","qu = 0.25, log(sigma) = -3.153964 : outer Newton did not converge fully.
+"
+"2","qu = 0.25, log(sigma) = -3.330674 : outer Newton did not converge fully.
+"
+"2","qu = 0.25, log(sigma) = -3.25367 : outer Newton did not converge fully.
+"
+"2","qu = 0.25, log(sigma) = -3.254842 : outer Newton did not converge fully.
+"
+"2","qu = 0.25, log(sigma) = -3.25509 : outer Newton did not converge fully.
+"
+"2","qu = 0.25, log(sigma) = -3.254964 : outer Newton did not converge fully.
+"
+"2","qu = 0.75, log(sigma) = -2.678463 : outer Newton did not converge fully.
+"
+"2","qu = 0.75, log(sigma) = -2.88072 : outer Newton did not converge fully.
+"
+"2","qu = 0.75, log(sigma) = -3.005722 : outer Newton did not converge fully.
+"
+"2","qu = 0.75, log(sigma) = -3.130724 : outer Newton did not converge fully.
+"
+"2","qu = 0.75, log(sigma) = -3.160233 : outer Newton did not converge fully.
+"
+"2","qu = 0.75, log(sigma) = -3.913208 : outer Newton did not converge fully.
+"
+"2","qu = 0.75, log(sigma) = -3.91919 : outer Newton did not converge fully.
+"
+"2","qu = 0.75, log(sigma) = -3.918346 : outer Newton did not converge fully.
+"
