@@ -1,0 +1,9 @@
+/* css styles */
+body.dark {
+  background-color: #121212; /* Cor de fundo escura */
+  color: #ffffff; /* Cor do texto, ajuste se necessário */
+}
+
+body.dark a {
+  color: #1a73e8; /* Cor dos links, ajuste se necessário */
+}
