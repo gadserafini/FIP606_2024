@@ -5,7 +5,7 @@ format: html
 editor: visual
 ---
 
-# ^Importando\ Datasets^
+# ^Importando Datasets^
 
 A importação de dados é um passo crucial na análise de dados, pois permite que você traga informações de várias fontes para dentro do ambiente R, onde podem ser limpas, manipuladas e analisadas. Com R, você pode importar dados de diversos formatos, como CSV, Excel, e até mesmo planilhas online do Google Sheets. Utilizar pacotes específicos para cada tipo de arquivo garante que os dados sejam lidos de maneira eficiente e sem erros.
 
@@ -50,7 +50,7 @@ df21 <- read_excel("dados-diversos.xlsx", sheet = "escala")
 
 Outra opção, para arquivos CSV, é a utilização do pacote `tidyverse`, uma coleção de pacotes R para ciência de dados, incluindo `readr` para leitura de arquivos CSV. O `tidyverse` simplifica e uniformiza várias operações de manipulação de dados.
 
-Neste caso utilizamos a função `read_csv``("nome_do_arquivo.xlsx")`, lembrando que, caso o arquivo esteja em outra pasta é necessário colocar o caminho do arquivo antes do nome.
+Neste caso utilizamos a função ``` read_csv``("nome_do_arquivo.xlsx") ```, lembrando que, caso o arquivo esteja em outra pasta é necessário colocar o caminho do arquivo antes do nome.
 
 ```{r}
 library(tidyverse)
@@ -63,16 +63,16 @@ Atualmente a utilização de drives em nuvem para salvar bancos de dados está a
 
 Para utilizar um banco de dados diretamente do Google Drive, por exemplo, pode-se utilizar os pacotes `gsheet` e `googlesheets4`. O pacote `gsheet` permite a leitura rápida de Google Sheets usando URLs, enquanto o `googlesheets4` oferece funcionalidade mais abrangente para leitura e escrita em Google Sheets.
 
-No caso do pacote `gsheet`, a função utilizada para abrir e importar dados de arquivos no Google Drive é o `gsheet2tbl(``"link_do_arquivo")`.
+No caso do pacote `gsheet`, a função utilizada para abrir e importar dados de arquivos no Google Drive é o ``` gsheet2tbl(``"link_do_arquivo") ```.
 
 ```{r}
 library(gsheet)
-df4 <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1aID5Dh6PlBVCKzU1j7k-WA6zuWQWE2NhtWEgdJtt5iA/edit?usp=sharing")
+df4 <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit?gid=983033137#gid=983033137")
 
-df41 <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1aID5Dh6PlBVCKzU1j7k-WA6zuWQWE2NhtWEgdJtt5iA/edit?usp=sharing", sheetid = "2")
+df41 <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit?usp=drive_link&ouid=104144100918915406194&rtpof=true&sd=true", sheetid = "3")
 ```
 
-Para o pacote `googlesheets4`, o nome da função é `read_sheet``("link_do_arquivo")`. Ele permite não somente baixar, mas ele permite também escrever nos arquivos.
+Para o pacote `googlesheets4`, o nome da função é ``` read_sheet``("link_do_arquivo") ```. Ele permite não somente baixar, mas ele permite também escrever nos arquivos.
 
 `library(googlesheets4) df5 <- read_sheet("https://docs.google.com/spreadsheets/d/1aID5Dh6PlBVCKzU1j7k-WA6zuWQWE2NhtWEgdJtt5iA/edit?usp=sharing")`
 

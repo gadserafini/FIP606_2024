@@ -1,0 +1,14 @@
+"0","library(report)"
+"0","report(teste1)"
+"2","Aviso:"
+"2"," Function `format_text()` is deprecated and will be removed in a
+  future release. Please use `text_format()` instead.
+"
+"1","Effect sizes were labelled following Cohen's (1988) recommendations.
+
+The Welch Two Sample t-test testing the difference between mg2$Mg2 and
+mg2$control (mean of x = 10.52, mean of y = 15.68) suggests that the
+effect is negative, statistically significant, and large (difference =
+-5.16, 95% CI [-6.49, -3.83], t(17.35) = -8.15, p < .001; Cohen's d =
+-3.65, 95% CI [-5.12, -2.14])
+"

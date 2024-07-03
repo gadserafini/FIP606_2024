@@ -1,6 +1,0 @@
-"0","tibble::tribble("
-"0","  ~ Posição, Pais, Visitas`1`,          ~Brazil, ~`4,303`,"
-"2","Erro: unexpected symbol em:
-""tibble::tribble(
-  ~ Posição, Pais, Visitas`1`""
-"

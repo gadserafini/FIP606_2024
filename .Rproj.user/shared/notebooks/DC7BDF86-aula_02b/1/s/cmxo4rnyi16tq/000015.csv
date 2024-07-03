@@ -1,0 +1,4 @@
+"0","library(gsheet)"
+"0","df4 <- gsheet2tbl(""https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit?gid=983033137#gid=983033137"")"
+"0",""
+"0","df41 <- gsheet2tbl(""https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit?usp=drive_link&ouid=104144100918915406194&rtpof=true&sd=true"", sheetid = ""2"")"

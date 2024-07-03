@@ -1,2 +1,5 @@
 "0","library(ec50estimator)"
+"2","Aviso:"
+"2"," pacote ‘ec50estimator’ foi compilado no R versão 4.4.1
+"
 "0","head(multi_isolate)"

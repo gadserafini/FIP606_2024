@@ -1,0 +1,6 @@
+"0","escala = gsheet2tbl(""https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=1729131173"")"
+"0",""
+"0","escala |> "
+"0","  ggplot(aes(assessment, acuracia))+"
+"0","  geom_boxplot()+"
+"0","  theme_bw()"

@@ -1,0 +1,6 @@
+"0","micelial = gsheet2tbl(""https://docs.google.com/spreadsheets/d/1bq2N19DcZdtax2fQW9OHSGMR0X2__Z9T/edit#gid=959387827"")"
+"0",""
+"0","micelial |> "
+"0","  ggplot(aes(especie, tcm))+"
+"0","  geom_boxplot()+"
+"0","  theme_bw()"

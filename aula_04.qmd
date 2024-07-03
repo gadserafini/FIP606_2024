@@ -1,0 +1,206 @@
+---
+title: "Visualização de dados, outras abordagens"
+author: "Gabriel A. D. Serafini"
+format: html
+editor: visual
+warming: false
+menssage: false
+---
+
+# Visualização de Dados: Outras Opções para Importação e Visualização de Dados
+
+A visualização de dados é essencial para entender e comunicar padrões e insights, existindo inúmeras possíbilidades de importação de dados. Agora iremos explorar outras técnicas e pacotes no R que facilitam a importação e visualização de datasets.
+
+## Importando Datasets
+
+Uma das formas é a concatenação de dados de forma manual os atribuindo a um objeto. Para isso podemos utilizar a função nativa `c()` que concatena os dados, separados por vírgula.
+
+```{r}
+comp <- c("9", "12.5", "10", "8", "13.2", "11", "10.8", "9.5", "10.8", "10.4", "13.72", "15.91", "15.7", "14.2", "15.9", "16.54", "18", "14.4", "16.41", "16")
+comp
+
+comp <- c(9, 12.5, 10, 8, 13.2, 11, 10.8, 9.5, 10.8, 10.4, 13.72, 15.91, 15.7, 14.2, 15.9, 16.54, 18, 14.4, 16.41, 16)
+comp
+```
+
+Também podemos utilizar o pacote `datapasta`, que permite copiar dados de qualquer lugar e colar diretamente no R como uma tibble.
+
+```{r}
+library(datapasta)
+visitas <- tibble::tribble(
+             ~`codigo`,          ~país, ~`n2`,
+             1L,     "Brazil",      4303L,
+               2L,     "Mozambique",      43L,
+               3L,       "Portugal",      33L,
+               4L,  "United States",      23L,
+               5L,         "Angola",      19L,
+               6L,          "Spain",      16L,
+               7L,      "(not set)",      12L,
+               8L,       "Colombia",       8L,
+               9L,        "Germany",       5L,
+              10L,        "Hungary",       5L,
+              11L, "United Kingdom",       5L,
+              12L,    "Netherlands",       4L,
+              13L,        "Ecuador",       3L,
+              14L,         "France",       3L,
+              15L,          "Chile",       2L,
+              16L,       "Paraguay",       2L,
+              17L,           "Peru",       2L,
+              18L,      "Argentina",       1L,
+              19L,        "Austria",       1L,
+              20L,        "Bolivia",       1L,
+              21L,     "Cape Verde",       1L,
+              22L,          "China",       1L,
+              23L,          "Egypt",       1L,
+              24L,        "Finland",       1L,
+              25L,          "India",       1L,
+              26L,          "Italy",       1L,
+              27L,       "Malaysia",       1L,
+              28L,       "Pakistan",       1L,
+              29L,         "Poland",       1L,
+              30L,      "Singapore",       1L,
+              31L,    "Timor-Leste",       1L,
+              32L,        "Uruguay",       1L
+             )
+head(visitas)
+```
+
+## Instalando pacotes de outros repositórios
+
+O pacote `pak` permite que os dados sejam baixados de outros repositórios. Para isso, inicialmente precisamos instalar o pacote.
+
+```{r}
+#install.packages("pak")
+```
+
+Agora, poderemos instalar pacotes de outros repositórios, como o `Icens`, que será utilizado em outros tópicos. Muitos destes pacotes contem datasets que podem ser utilizados para testes de funções.
+
+```{r}
+#pak::pkg_install("Icens")
+```
+
+Também podemos baixar os pacortes diretamente do github, como o pacote do Prof. Emerson, `r4pde` através do caminho "emdelponte/r4pde".
+
+```{r}
+#pak::pkg_install("emdelponte/r4pde")
+```
+
+## Transformando Formatos com `tidyverse`
+
+Você pode transformar dados de formato largo para formato longo (e vice-versa) usando `tidyverse`. Para isso vamos praticar utilizando a função `tribble`, para colarmos os dados do caopítulo **10.4** do livro [**r4pde**](https://r4pde.net/temporal-fitting).
+
+```{r}
+library(tidyverse)
+pepper <- 
+  tribble(
+   ~t,  ~`1`,  ~`2`,  ~`3`,
+   0,  0.08, 0.001, 0.001,
+   7,  0.13,  0.01, 0.001,
+  14,  0.78,  0.09,  0.01,
+  21,  0.92,  0.25,  0.05,
+  28,  0.99,   0.8,  0.18,
+  35, 0.995,  0.98,  0.34,
+  42, 0.999,  0.99,  0.48,
+  49, 0.999, 0.999,  0.74
+  ) 
+```
+
+### Adiconando anotações em um gráfico
+
+No `ggplot2`, `annotate` é uma função usada para adicionar anotações diretamente a um gráfico. Anotações podem ser texto, formas ou outras marcas visuais que ajudam a destacar ou explicar partes específicas do gráfico.
+
+A função `annotate` permite que você adicione elementos como texto, segmentos, retângulos e outros tipos de geometrias ao seu gráfico. Isso é útil para chamar a atenção para pontos específicos, adicionar rótulos personalizados ou destacar áreas de interesse.
+
+Aproveitando o exemplo anterior, podemos inserir textos no gráfico fornecendo as coordenadas dos textos no mapa. Por exemplo, podemos adicionar os valores dos tratamentos para cada curva:
+
+```{r}
+library(ggplot2)
+pepper |> 
+  pivot_longer(2:4,
+               names_to = "epidemic",
+               values_to = "inc") |> 
+  ggplot(aes(t, inc, color = epidemic))+
+  geom_point()+
+  geom_line()+
+  annotate(geom = "text", x = 12, y = 0.75, label = "1")+
+  annotate(geom = "text", x = 25, y = 0.75, label = "2")+
+  annotate(geom = "text", x = 45, y = 0.75, label = "3")+
+  theme(legend.position = "none") #retirar a legenda para não ficar redundante
+```
+
+## Tabelas de Contingência com `janitor`
+
+As tabelas de contingência permitem cruzar variáveis e observar suas interações. O pacote `janitor` facilita a criação dessas tabelas.
+
+Por exemplo a função `count` conta quantas observações existem na variável e exibe em uma tabela, podemos filtrar colocando mais variáveis.
+
+```{r}
+cr <- read_csv("https://raw.githubusercontent.com/emdelponte/paper-coffee-rust-Ethiopia/master/data/survey_clean.csv")
+
+cr |> 
+  count(region, zone)
+  
+```
+
+Podemos cruzar as variáveis usando a função de contingência `tabyl` para cruzarmos duas variáveis, como por exemplo:
+
+```{r}
+library(janitor)
+cr |> 
+  tabyl(region, zone)
+```
+
+```{r}
+cr |> 
+  tabyl(zone, region)
+```
+
+```{r}
+cr |> 
+  tabyl(cultivar, region)
+```
+
+Esse artifício é interessante para obervações, como por exemplo, podemos observar abaixo que na cultivar melhorada só se trabalha com manejo intensivo enquanto que a cultivar local não se tem manejo, ou ele é minimo.
+
+```{r}
+cr |> 
+  tabyl(cultivar, farm_management)
+```
+
+## Visualizando Dados com Gráficos
+
+### Empilhamento de Colunas
+
+Podemos empilhar colunas e visualizar a distribuição de categorias, para isso podemos utilizar o `geom_col`, como no exemplo abaixo:
+
+```{r}
+cr |> 
+  count(farm_management, cultivar) |> 
+  ggplot(aes(cultivar, n, fill = farm_management))+
+  geom_col()
+```
+
+### Colunas Separadas
+
+Para visualizar colunas separadas, podemos utilizar `position = "dodge2"`, assim as colunas podem ser separadas por cultivares como nos exemplos abaixo.
+
+```{r}
+cr |> 
+  count(farm_management, cultivar) |> 
+  ggplot(aes(cultivar, n, fill = farm_management))+
+  geom_col(position = "dodge2")
+```
+
+```{r}
+library(ggthemes)
+cr |> 
+  count(farm_management, cultivar) |> 
+  ggplot(aes(cultivar, n, fill = farm_management))+
+  geom_col(position = "dodge2")+
+  scale_fill_calc()+
+  theme_bw()+
+  theme(strip.text.x = element_blank(),
+        legend.position = "top")+ #Tira o nome em cima
+  #geom_text(position = position_dodge(width = 0.9))+
+  facet_wrap(~cultivar, scales = "free_x")
+```

@@ -1,0 +1,4 @@
+"0","cr |> "
+"0","  count(farm_management, cultivar) |> "
+"0","  ggplot(aes(cultivar, n, fill = farm_management))+"
+"0","  geom_col()"

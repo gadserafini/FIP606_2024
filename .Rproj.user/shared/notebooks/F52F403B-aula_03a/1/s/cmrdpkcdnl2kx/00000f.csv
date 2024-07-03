@@ -1,5 +1,0 @@
-"0","cr |>"
-"0","  group_by(region) |>"
-"0","  summarize(inc_mean = mean(inc),"
-"0","            inc_med = median(inc),"
-"0","            sd_mean = sd(inc))"

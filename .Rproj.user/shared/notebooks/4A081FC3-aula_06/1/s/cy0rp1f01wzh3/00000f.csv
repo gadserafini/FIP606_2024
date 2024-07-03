@@ -1,0 +1,13 @@
+"0","library(DHARMa)"
+"2","Aviso:"
+"2"," pacote ‘DHARMa’ foi compilado no R versão 4.4.1
+"
+"2","This is DHARMa 0.4.6. For overview type '?DHARMa'. For recent changes, type news(package = 'DHARMa')
+"
+"0","plot(simulateResiduals(m1))"
+"2","Registered S3 methods overwritten by 'htmltools':
+  method               from         
+  print.html           tools:rstudio
+  print.shiny.tag      tools:rstudio
+  print.shiny.tag.list tools:rstudio
+"
